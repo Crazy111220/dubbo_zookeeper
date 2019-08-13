@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情页面</title>
+    <!--引入layui的样式文件-->
+    <link rel="stylesheet" href="/static/lib/layui/css/layui.css">
+    <!--引入layui的js文件-->
+    <script src="/static/lib/layui/layui.js"></script>
+</head>
+<body>
+    <div id="saveGoodDetailDiv" style="display: none;margin-top: 20px;">
+        <form class="layui-form" action="" lay-filter="formDemo">
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品名称：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" lay-verify="required" placeholder="请输入商品名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品价格：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="price" lay-verify="required|number" placeholder="请输入商品价格" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品产地：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="address" lay-verify="required" placeholder="请输入商品产地" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生产日期：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="createDate" name="createDate" lay-verify="required" placeholder="请选择商品生产时间" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品库存：</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="remaining" lay-verify="required|number" placeholder="请输入商品库存" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品类型：</label>
+                <div class="layui-input-inline">
+                    <select name="sortId" id="selGoodSort" lay-verify="required">
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="subDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div align="center" style="margin-top: 50px">
+        <h1>商品详情页面</h1>
+        <button type="button" class="layui-btn" id="saveGoodDetailBtn"><i class="layui-icon">&#xe654;</i>添加商品</button>
+        <button type="button" class="layui-btn" id="outDataBtn" style="margin-left: 60%"><i class="layui-icon">&#xe601;</i>导出表格</button>
+        <!--数据表格的容器-->
+        <table id="demo" lay-filter="test"></table>
+    </div>
+</body>
+<script src="/static/js/goodDetail.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail"><i class="layui-icon">&#xe615;</i>查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
+</script>
+</html>

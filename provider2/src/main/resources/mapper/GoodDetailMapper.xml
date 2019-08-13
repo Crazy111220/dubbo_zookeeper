@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java.provider.mapper.GoodDetailMapper">
+
+    <!--自定义结果集-->
+    <resultMap id="goodDetailMap" type="GoodDetail">
+        <result property="id" column="id"/>
+        <result property="sortId" column="sortId"/>
+        <result property="name" column="name"/>
+        <result property="address" column="address"/>
+        <result property="price" column="price"/>
+        <result property="createDate" column="createDate"/>
+        <result property="remaining" column="remaining"/>
+    </resultMap>
+
+    <!--配置嵌套查询-->
+    <resultMap id="goodDetailSelGoodSortMap" type="GoodDetail" extends="goodDetailMap">
+        <association property="goodSort" column="sortId" select="com.java.provider.mapper.GoodSortMapper.selectGoodSortById"/>
+
+    </resultMap>
+
+    <!--查询的字段-->
+    <sql id="sel_GoodDetailCloumns_List">
+        id,sortId,name,address,price,createDate,remaining
+    </sql>
+
+    <!--查询的条件-->
+    <sql id="selectGoodDetailParams">
+        <where>
+            <if test="sortId != null and sortId != 0">
+                and sortId = #{sortId}
+            </if>
+            <if test="name != null and name != ''">
+                and name  like concat("%",#{name},"%")
+            </if>
+        </where>
+    </sql>
+
+    <!--根据条件查询商品数据-->
+    <select id="selectGoodDetailByParams" resultMap="goodDetailSelGoodSortMap">
+        select <include refid="sel_GoodDetailCloumns_List"/> from good_detail <include refid="selectGoodDetailParams"/>
+          order by id desc
+    </select>
+
+    <!--根据id删除单个数据-->
+    <delete id="deleteGoodDetailById">
+        delete from good_detail where id = #{id}
+    </delete>
+
+    <!--添加商品详情数据-->
+    <insert id="insertGoodDetail">
+        insert into good_detail values (null,#{sortId},#{name},#{address},#{price},#{createDate},#{remaining})
+    </insert>
+</mapper>

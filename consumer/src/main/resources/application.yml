@@ -1,0 +1,24 @@
+server:
+   port: 8888
+
+spring:
+  dubbo:
+      application:
+          name: consumer
+      registry:
+          address: zookeeper://127.0.0.1:2181
+      scan: com.java.consumer.controller
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///goodsalesystem?useSSL=false
+    username: root
+    password: Root
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 10
+  #mvc:
+    #static-path-pattern: /static/**
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.java.commons.entity

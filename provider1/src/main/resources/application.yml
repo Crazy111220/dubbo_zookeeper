@@ -1,0 +1,49 @@
+server:
+  port: 7071
+
+## Dubbo 服务提供者配置
+#应用名
+spring:
+  dubbo:
+    application:
+      name: provider1
+    #zookeeper的注册地址
+    registry:
+      address: zookeeper://127.0.0.1:2181
+    #注册zookeeper的协议
+    protocol:
+      name: dubbo
+      #提供者注册到zookeeper上的端口号
+      port: 20881
+    #提供服务的业务层
+    scan: com.java.provider.service.impl
+  #数据库连接信息
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///goodsalesystem?useSSL=false
+    username: root
+    password: Root
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 10
+
+  redis:
+    #指明使用哪一个数据库
+    database: 0
+    #访问的ip地址
+    host: 127.0.0.1
+    #访问端口
+    port: 6379
+    #timeout: 0
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启MyBatis的二级缓存
+    cache-enabled: true
+    #开启懒加载
+    #lazy-loading-enabled: true
+    #false 为按需加载
+    #aggressive-lazy-loading: false
+  type-aliases-package: com.java.commons.entity
